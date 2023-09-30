@@ -29,7 +29,7 @@ busiNum = 0
 def getBusinessData(places_ids, businessNumber):
     
     for place_ide in places_ids:
-        url = f'https://maps.googleapis.com/maps/api/place/details/json?place_id={place_ide}&fields=formatted_address,name,opening_hours,formatted_phone_number,website,price_level,url,reviews,photos&key=AIzaSyDtaUNCIc550A9vMdv5eb3EA9rtiy8td7o'
+        url = f'https://maps.googleapis.com/maps/api/place/details/json?place_id={place_ide}&fields=formatted_address,name,opening_hours,formatted_phone_number,website,price_level,url,reviews,photos&key=[your key]'
         payload={}
         headers = {}
         response = requests.request("GET", url, headers=headers, data=payload)
@@ -70,7 +70,7 @@ def getBusinessData(places_ids, businessNumber):
             picutures = []
             for pic in innerData['photos']:
                 picRef = pic['photo_reference']
-                picUrl = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference={picRef}&key=AIzaSyDtaUNCIc550A9vMdv5eb3EA9rtiy8td7o"
+                picUrl = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference={picRef}&key=[your key]"
                 picutures.append(picUrl)
 
             if len(picutures) == 0:
@@ -153,9 +153,9 @@ def gestBusinessesNearBY(alt, longt, radious, lang, Btype,keywords,page_token=No
     for i in range(3):
         time.sleep(2)
         if page_token is None:
-            url = f'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={alt},{longt}&radius={radious}&lang={lang}&type={Btype}&keyword={keywords}&key=AIzaSyDtaUNCIc550A9vMdv5eb3EA9rtiy8td7o'
+            url = f'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={alt},{longt}&radius={radious}&lang={lang}&type={Btype}&keyword={keywords}&key=[your key]'
         elif page_token is not None:
-            url = f'https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken={page_token}&key=AIzaSyDtaUNCIc550A9vMdv5eb3EA9rtiy8td7o'
+            url = f'https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken={page_token}&key=[your key]'
 
         response = requests.request("GET", url)
         places = json.loads(response.text)['results']
